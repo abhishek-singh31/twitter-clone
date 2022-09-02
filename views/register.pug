@@ -1,0 +1,31 @@
+extends layouts/register-layout.pug
+
+block content
+    .loginContainer
+        h1 SignUp to Twitter
+        form#registerForm(method="post", onsubmit="event.preventDefault(); validateForm();")
+
+            p.errMessage #{errorMessage}
+            input(type="text", name="firstName", placeholder="Enter First name", value=firstName required="")
+            input(type="text", name="lastName", placeholder="Enter Last name",value=lastName required="")
+            input(type="text", name="username", placeholder="Enter Username",value=username required="")
+            input(type="email", name="email", placeholder="Enter Email",value=email required="")
+            input#password(type="password", name="password", placeholder="Enter Password", required="")
+            input#passwordConf(type="password", name="passwordConf", placeholder="Enter Confirm password", required="")
+            input(type="submit", value="Sign up")
+
+        a(href="/login") Account Already Created? Login
+    
+    script.
+        var passwordField = document.getElementById("password")
+        var passwordConfirmField = document.getElementById("passwordConf")
+        var form = document.getElementById("registerForm")
+
+        function validateForm() {
+            if(passwordField.value != passwordConfirmField.value) {
+                alert("Passwords do not match. Please try again.")
+            }
+            else {
+                form.submit();
+            }
+        }
